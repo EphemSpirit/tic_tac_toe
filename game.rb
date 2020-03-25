@@ -37,10 +37,10 @@ class Game
       puts "What square would you like to play?"
       @choice = gets.chomp.to_i
       @board.mark_square(@current_player, @choice)
+      draw_board
+      game_over?
+      switch_player
     end
-    draw_board
-    game_over?
-    switch_player
   end
 
   def winner? spots
