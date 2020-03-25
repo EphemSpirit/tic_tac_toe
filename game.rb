@@ -14,7 +14,7 @@ class Game
 
   @@game_over = false
 
-  attr_reader :current_player, :other_player, :spots
+  attr_reader :current_player, :other_player, :choice
 
   def initialize(p1, p2, board = Board.new)
     @p1 = p1
@@ -35,25 +35,28 @@ class Game
 
     until @@game_over
       puts "What square would you like to play?"
-      choice = gets.chomp
-      if @spots[choice].nil?
-        @spots[choice] = @current_player.sign
-      else
-        puts "That spot is filled, please pick another!"
-      end
+      @choice = gets.chomp.to_i
+      @board.mark_square(@current_player, @choice)
     end
     draw_board
     game_over?
     switch_player
   end
 
-  def someone_won?
-    if WIN_CONDITIONS.any? true then @@game_over = true end
+  def winner? spots
+    winner = false
+    WIN_CONDITIONS.each do |lines|
+      winner = lines.each do |place|
+        choice == @spots[choice]
+      end
+      break if winner
+    end
+    return winner
   end
 
   def game_over?
-    if @@game_over
-      end_game
+    if winner?
+      @@game_over = true
     end
   end
 
@@ -61,9 +64,6 @@ class Game
     @current_player, @other_player = @other_player, @current_player
   end
 
-  def end_game
-
-  end
 end
 
 p1 = Player.new
