@@ -1,7 +1,7 @@
 class Board
 
   attr_reader :spots
-  attr_accessor :sign, :choice
+  attr_accessor :sign
 
   def initialize
     @spots = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -31,15 +31,15 @@ class Board
   end
 
   def mark_square(player, choice)
-    if !valid_move?
-      puts "That square is taken! Please choose another."
-    else
+    if valid_move?(choice)
       @spots[choice-1] = player.sign
+    else
+      puts "That square is taken! Please choose another."
     end
   end
 
   def valid_move?(choice)
-    if @spots[choice-1].nil?
+    if @spots[choice-1] == " "
       true
     else
       false

@@ -34,16 +34,17 @@ class Game
     end
 
     until @@game_over
-      puts "What square would you like to play?"
+      puts "#{@current_player.sign.upcase}, it's your turn! What square would you like to play?"
       @choice = gets.chomp.to_i
-      @board.mark_square(@current_player, @choice)
-      draw_board
-      game_over?
-      switch_player
+      if @board.mark_square(@current_player, @choice)
+        @board.draw_board
+        # game_over?()
+        switch_player()
+      end
     end
   end
 
-  def winner? spots
+  def winner?
     winner = false
     WIN_CONDITIONS.each do |lines|
       winner = lines.each do |place|
@@ -55,7 +56,7 @@ class Game
   end
 
   def game_over?
-    if winner?
+    if winner?(spots)
       @@game_over = true
     end
   end
