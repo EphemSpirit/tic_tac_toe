@@ -46,4 +46,17 @@ class Board
     end
   end
 
+  def check_if_winner
+    if (@spots[0] == @spots[1] && @spots[1] == @spots[2] && @spots[2] != " ") || #horizontals
+       (@spots[3] == @spots[4] && @spots[4] == @spots[5] && @spots[5] != " ") ||
+       (@spots[6] == @spots[7] && @spots[7] == @spots[8] && @spots[8] != " ") ||
+       (@spots[0] == @spots[3] && @spots[3] == @spots[6] && @spots[6] != " ") || #verticals
+       (@spots[1] == @spots[4] && @spots[4] == @spots[7] && @spots[7] != " ") ||
+       (@spots[2] == @spots[5] && @spots[5] == @spots[8] && @spots[8] != " ") ||
+       (@spots[0] == @spots[4] && @spots[4] == @spots[8] && @spots[8] != " ") ||
+       (@spots[2] == @spots[4] && @spots[4] == @spots[6] && @spots[6] != " ")
+       true
+     end
+   end
+
 end

@@ -14,7 +14,7 @@ class Game
 
   @@game_over = false
 
-  attr_reader :current_player, :other_player, :choice
+  attr_reader :current_player, :other_player, :choice, :spots
 
   def initialize(p1, p2, board = Board.new)
     @p1 = p1
@@ -22,6 +22,7 @@ class Game
     @board = board
     @current_player = @p1
     @other_player = @p2
+    @spots = spots
     Board.gameplay
   end
 
@@ -38,7 +39,7 @@ class Game
       @choice = gets.chomp.to_i
       if @board.mark_square(@current_player, @choice)
         @board.draw_board
-        # game_over?()
+        game_over?()
         switch_player()
       end
     end
@@ -56,7 +57,7 @@ class Game
   end
 
   def game_over?
-    if winner?(spots)
+    if @board.check_if_winner
       @@game_over = true
     end
   end
