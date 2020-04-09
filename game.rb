@@ -3,18 +3,9 @@ require_relative "player"
 
 class Game
 
-  WIN_CONDITIONS = [[1, 2, 3], #horizontals
-                    [4, 5, 6],
-                    [7, 8, 9],
-                    [1, 4, 7], #verticals
-                    [2, 5, 8],
-                    [3, 6, 9],
-                    [1, 5, 9], #diagonals
-                    [3, 5, 7]]
-
   @@game_over = false
 
-  attr_reader :current_player, :other_player, :choice, :spots
+  attr_reader :current_player, :other_player, :choice
 
   def initialize(p1, p2, board = Board.new)
     @p1 = p1
@@ -22,7 +13,6 @@ class Game
     @board = board
     @current_player = @p1
     @other_player = @p2
-    @spots = spots
     Board.gameplay
   end
 
@@ -43,17 +33,6 @@ class Game
         switch_player()
       end
     end
-  end
-
-  def winner?
-    winner = false
-    WIN_CONDITIONS.each do |lines|
-      winner = lines.each do |place|
-        choice == @spots[choice]
-      end
-      break if winner
-    end
-    return winner
   end
 
   def game_over?
